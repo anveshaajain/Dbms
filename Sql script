@@ -99,3 +99,6 @@
 
  -- SELECT * FROM EMPDEPT WHERE DeptName = 'HR';
 
+-- -- SELECT * FROM EMPDEPT WHERE NOT DeptName = 'HR';
+
+-- SELECT * FROM EMPDEPT WHERE DeptName ='Sales' AND DeptLoc='Chennai';
