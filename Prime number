@@ -1,6 +1,6 @@
-SET SERVEROUTPUT ON;
-
+-- 1. Create the procedure
 CREATE OR REPLACE PROCEDURE find_prime_numbers(n IN NUMBER) IS
+    is_prime BOOLEAN;
 BEGIN
     IF n < 1 THEN
         DBMS_OUTPUT.PUT_LINE('Enter a positive number.');
@@ -8,23 +8,18 @@ BEGIN
     END IF;
 
     FOR i IN 2..n LOOP
-        DECLARE
-            is_prime BOOLEAN := TRUE;
-        BEGIN
-            FOR j IN 2..i-1 LOOP
-                IF MOD(i, j) = 0 THEN
-                    is_prime := FALSE;
-                    EXIT;
-                END IF;
-            END LOOP;
+        is_prime := TRUE;
 
-            IF is_prime THEN
-                DBMS_OUTPUT.PUT_LINE(i || ' is prime');
+        FOR j IN 2..FLOOR(SQRT(i)) LOOP
+            IF MOD(i, j) = 0 THEN
+                is_prime := FALSE;
+                EXIT;
             END IF;
-        END;
+        END LOOP;
+
+        IF is_prime THEN
+            DBMS_OUTPUT.PUT_LINE(i || ' is prime');
+        END IF;
     END LOOP;
 END find_prime_numbers;
 /
-
--- Execute
-EXEC find_prime_numbers(20);
