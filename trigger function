@@ -45,4 +45,45 @@
 
 -- DELETE FROM employee WHERE emp_id = 2;
 
-SELECT * FROM oldemployee;
+-- SELECT * FROM oldemployee;
+
+-- CREATE OR REPLACE TRIGGER trg_limit_delete
+-- BEFORE DELETE ON employee
+-- DECLARE
+--     v_total NUMBER;
+-- BEGIN
+--     SELECT COUNT(*) INTO v_total FROM employee;
+
+--     IF v_total > 2 THEN
+--         RAISE_APPLICATION_ERROR(-20001, 'You can only delete up to 2 employees at a time.');
+--     END IF;
+-- END;
+-- /
+
+
+-- DELETE FROM employee WHERE emp_id IN (1, 2);
+
+-- DELETE FROM employee;
+
+-- SELECT * FROM oldemployee;
+
+-- CREATE OR REPLACE TRIGGER trg_salary_limit
+-- BEFORE UPDATE OF salary ON employee
+-- FOR EACH ROW
+-- BEGIN
+--     -- Check if the new salary is greater than 67,000
+--     IF :NEW.salary > 67000 THEN
+--         RAISE_APPLICATION_ERROR(-20002, 'Salary cannot exceed 67,000.');
+--     END IF;
+-- END;
+-- /
+
+-- UPDATE employee
+-- SET salary = 70000
+-- WHERE emp_id = 1;
+
+
+-- UPDATE employee
+-- SET salary = 66000
+-- WHERE emp_id = 1;
+
